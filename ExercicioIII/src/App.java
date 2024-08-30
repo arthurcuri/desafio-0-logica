@@ -17,7 +17,7 @@ public class App {
 
     public static List<List<Integer>> subconjuntos(int[] vect){
         List<List<Integer>> subconjuntos = new ArrayList<>();
-        
+        subconjuntos.add(new ArrayList<>());
 
         for (int num : vect) {
             List<List<Integer>> novosSubconjuntos = new ArrayList<>();
