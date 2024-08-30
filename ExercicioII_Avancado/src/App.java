@@ -1,11 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+Dado um array de números inteiros, escreva uma função que retorne o 
+par de números com a menor diferença absoluta. Se houver mais de um par com a mesma diferença, 
+retorne todos eles em uma lista. Além disso, a função deve permitir os seguintes parâmetros opcionais: 
+allow_duplicates (booleano)
+Se definido como False, os pares de números não podem conter valores duplicados.
+sorted_pairs (booleano)
+Se definido como True, os pares no resultado devem estar ordenados em ordem crescente.
+unique_pairs (booleano)
+Se definido como True, a função deve retornar apenas
+pares únicos (ou seja, (a, b) e (b, a) são considerados o mesmo par). 
+*/
 public class App {
     public static void main(String[] args) throws Exception {
         int[] vect = {-5, -4, -3, -2};
 
-        // Teste da função com diferentes parâmetros
         List<int[]> result = menorDifAbsoluta(vect, false, true, true);
         for (int[] pair : result) {
             System.out.println("[" + pair[0] + ", " + pair[1] + "]");
@@ -16,17 +26,15 @@ public class App {
         List<int[]> list = new ArrayList<>();
         List<int[]> menorDiferenca = new ArrayList<>();
 
-        // Calcular as diferenças absolutas entre os pares
         for (int i = 0; i < vect.length; i++) {
             for (int j = i + 1; j < vect.length; j++) {
                 if (!allowDuplicates && vect[i] == vect[j]) {
-                    continue; // Ignora pares com números duplicados se allowDuplicates for false
+                    continue;
                 }
 
                 int a = vect[i];
                 int b = vect[j];
 
-                // Ordenar pares se sortedPairs for true
                 if (sortedPairs && a > b) {
                     int temp = a;
                     a = b;
@@ -37,21 +45,17 @@ public class App {
             }
         }
 
-        // Inicializa o menorValor com o primeiro valor na lista + 1
         int menorValor = list.get(0)[2] + 1;
 
-        // Identifica o menor valor de diferença absoluta
         for (int[] pair : list) {
             if (pair[2] != 0 && pair[2] < menorValor) {
                 menorValor = pair[2];
             }
         }
 
-        // Filtra os pares que possuem a menor diferença
         for (int[] pair : list) {
             if (pair[2] == menorValor) {
                 if (uniquePairs) {
-                    // Verificar se o par (a, b) já existe na lista de menorDiferenca
                     boolean alreadyExists = false;
                     for (int[] existingPair : menorDiferenca) {
                         if (existingPair[0] == pair[0] && existingPair[1] == pair[1]) {
@@ -67,7 +71,6 @@ public class App {
                 }
             }
         }
-
         return menorDiferenca;
     }
 }
